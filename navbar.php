@@ -6,9 +6,10 @@
                         if($result->num_rows > 0){
                             $row = $result->fetch_assoc();
                             $_SESSION['Balance'] = $row['Balance'];
-                        }?>
+                        }
+}?>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
         
             <a class="navbar-brand" href="#">KMITL</a>
@@ -29,8 +30,9 @@
                     </li>
  
                 </ul>
-
+                
                 <ul class="navbar-nav ml-auto">
+                <?php if (isset($_SESSION['id'])) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         ยินดีต้อนรับ คุณ <?php echo $_SESSION['name']; ?> ยอดเงินคงเหลือ <?php echo $_SESSION['Balance']; ?>
@@ -49,7 +51,6 @@
                     </li>
                     <?php } ?>
                 </ul>
-
             </div>
-        </div>
+        </div>  
     </nav>

@@ -19,7 +19,7 @@
             $username = $_POST['username'];
             $password = $conn->real_escape_string($_POST['password']);
 
-            $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND `Password` = MD5('".$password."')";
+            $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND (`Password` = MD5('".$password."') OR `Password` = '".$password."')";
             $result = $conn->query($sql);
 
             if($result->num_rows > 0){
@@ -30,6 +30,7 @@
                 header('location:index.php');
             }else{
                 echo 'Username or password is invalid';
+                echo("Error description: " . mysqli_error($conn));
             }
             
 
