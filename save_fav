@@ -1,0 +1,79 @@
+<?php session_start(); ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>รายการโปรด</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<?php
+
+include_once('connect.php');
+
+    $sql = "SELECT * FROM `favorites` WHERE `UserID` = '".$_SESSION['id']."' ORDER BY FavoritesName asc " or die("Error:" . mysqli_error()); 
+    $result = $conn->query($sql);
+    
+    
+    if($result->num_rows > 0){
+        echo $result->num_rows ;
+        $row = mysqli_fetch_assoc($result);
+     
+    }else{
+        echo "No";
+    }
+    
+?>
+
+
+    <?php include 'navbar.php';?>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto mt-5">
+                <div class="card">
+                <form action="" method="POST">
+                    <div class="card-header text-center">
+                        รายการโปรด
+                    </div>
+                    <div class="card-body">
+
+                        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+                        
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">ร้านค้า</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="UserID" name="UserID" value="<?php echo "$row[0]"; ?>" required>
+                            </div>
+                            <div class="col-sm-3">
+                            <input type="submit" name="submit" class="btn btn-success" value="โอนเงิน">
+                            </div>
+
+                        </div>
+                        <?php  }?>
+
+                    </div>
+                        <div class="card-footer text-center">
+                        
+                        </div>
+
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+</body>
+</html>

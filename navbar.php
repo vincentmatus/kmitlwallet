@@ -22,13 +22,18 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                     </li>
+                    <?php if (isset($_SESSION['id'])) { ?>
                     <li class="nav-item">
                         <a class="nav-link" href="pay.php">โอนเงิน</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="showhistory.php">History</a>
                     </li>
- 
+                    <li class="nav-item">
+                        <a class="nav-link" href="favorite.php">รายการโปรด</a>
+                    </li>
+                    
+                    <?php } ?>
                 </ul>
                 
                 <ul class="navbar-nav ml-auto">

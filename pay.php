@@ -53,6 +53,10 @@ if(isset($_POST['submit'])){
                 VALUES ('".$_SESSION['id']."', 'transfer', '".$_POST['value']."',  '".$_POST['UserID']."');";
                 $result = $conn->query($sql);
 
+                $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`)
+                VALUES ('".$_POST['UserID']."', 'receive', '".$_POST['value']."',  '".$_SESSION['id']."');";
+                $result = $conn->query($sql);
+
 
 
                 echo '<script> alert("Completed!") </script>';
@@ -103,7 +107,7 @@ if(isset($_POST['submit'])){
                         <div class="form-group row">
                             <label for="username" class="col-sm-3 col-form-label">รหัสร้านค้า</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="UserID" name="UserID" required>
+                                <input type="text" class="form-control" id="UserID" name="UserID" value="<?php if(isset($_GET["p_id"])){ echo $_GET["p_id"];} ?>" required>
                             </div>
                         </div>
                         <div class="form-group row">

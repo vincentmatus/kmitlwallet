@@ -15,27 +15,11 @@
 
         include_once('connect.php');
 
-        if (isset($_POST['submit'])) {
-            $username = $_POST['username'];
-            $password = $conn->real_escape_string($_POST['password']);
 
-            $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND (`Password` = MD5('".$password."') OR `Password` = '".$password."')";
-            $result = $conn->query($sql);
-
-            if($result->num_rows > 0){
-                $row = $result->fetch_assoc();
-                $_SESSION['id'] = $row['UserID'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['Balance'] = $row['Balance'];
-                header('location:index.php');
-            }else{
-                echo 'Username or password is invalid';
-                echo("Error description: " . mysqli_error($conn));
-            }
             
 
         
-        }
+        
     ?>
     <div class="container">
         <div class="row">
@@ -58,6 +42,26 @@
                             <input type="password" class="form-control" id="password" name="password">
                             </div>
                         </div>
+                        <?php
+                        if (isset($_POST['submit'])) {
+            $username = $_POST['username'];
+            $password = $conn->real_escape_string($_POST['password']);
+
+            $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND (`Password` = MD5('".$password."') OR `Password` = '".$password."')";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                $_SESSION['id'] = $row['UserID'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['Balance'] = $row['Balance'];
+                header('location:index.php');
+            }else{
+                echo 'Username or password is invalid';
+
+            }
+        }
+            ?>
                     </div>
                         <div class="card-footer text-center">
                             <input type="submit" name="submit" class="btn btn-success" value="Login">
