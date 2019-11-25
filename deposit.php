@@ -1,5 +1,5 @@
-<?php session_start();
-include_once('admin_lock.php');
+<?php session_start(); 
+include_once('user_lock.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,10 +7,11 @@ include_once('admin_lock.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>login</title>
+    <title>เติมเงิน</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
+<?php include 'navbar.php';?>
     <?php
 
         include_once('connect.php');
@@ -19,20 +20,19 @@ include_once('admin_lock.php');
 
             $temp = explode('.',$_FILES['fileUpload']['name']);
             $newName = round(microtime(true)).'.'. end($temp);
-            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/profiles/'.$newName)){
+            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/deposit-slip/'.$newName)){
 
-                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`, `PictureAccount`)
-                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."', '".$newName."');";
-                $result = $conn->query($sql);
+                $sql = "INSERT INTO `history`(`UserID`, `type`, amount,deposit_date,Bank, Picture)
+                VALUES ('".$_SESSION['id']."', 'deposit', '".$_POST['value']."','".$_POST['deposit_date']."','".$_POST['bank']."','".$newName."');";
+                 $result = $conn->query($sql);
 
                 if($result){
-                    echo '<script> alert("Register Completed!") </script>';
-                    header('Refresh:0; url=login.php');
+                    echo '<script> alert("Completed!") </script>';
+                    header('Refresh:0; url=deposit.php');
                 }else{
                     echo 'Noo';
                     echo("Error description: " . mysqli_error($conn));
                 }
-
             } 
          }   
     ?>
@@ -45,49 +45,26 @@ include_once('admin_lock.php');
                 <div class="card">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="card-header text-center">
-                            REGISTER
+                            เติมเงินผ่านธนาคาร
                         </div>
                         <div class="card-body">
-                        <div class="form-group row">
-                            <label for="firstname" class="col-sm-3 col-form-label">Userid</label>
+                      
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 col-form-label">จำนวนเงิน</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="userid" name="userid" required>
+                                    <input type="text" class="form-control" id="value" name="value" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="lastname" class="col-sm-3 col-form-label">Email</label>
+                                <label for="password" class="col-sm-3 col-form-label">เลขบัญชี</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="email" name="email" required>
+                                    <input type="text" class="form-control" id="bank" name="bank" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Password</label>
+                                <label for="password" class="col-sm-3 col-form-label">วัน เวลาที่โอน</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Surname</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="surname" name="surname" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Tel.</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="telnumber" name="telnumber" required>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Birthday</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="birthday" name="birthday" required>
+                                    <input type="datetime-local" class="form-control" id="deposit_date" name="deposit_date" required>
                                 </div>
                             </div>
                             <div class="form-group row">
