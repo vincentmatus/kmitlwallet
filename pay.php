@@ -50,8 +50,8 @@ if(isset($_POST['submit'])){
 
         
             if($result){
-                $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`)
-                VALUES ('".$_SESSION['id']."', 'transfer', '".$_POST['value']."',  '".$_POST['UserID']."');";
+                $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`,remind)
+                VALUES ('".$_SESSION['id']."', 'transfer', '".$_POST['value']."',  '".$_POST['UserID']."','".$_POST['remind']."');";
                 $result = $conn->query($sql);
 
                 $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`)
@@ -115,6 +115,12 @@ if(isset($_POST['submit'])){
                             <label for="password" class="col-sm-3 col-form-label">จำนวนเงิน</label>
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="value" name="value" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">บันทึกช่วยจำ</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="remind" name="remind" rows="3" placeholder="ไม่เกิน 255 ตัวอักษร"></textarea>
                             </div>
                         </div>
                     </div>

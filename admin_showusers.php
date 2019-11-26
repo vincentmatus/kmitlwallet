@@ -1,5 +1,5 @@
 <?php session_start(); 
-include_once('user_lock.php');
+include_once('admin_lock.php');
 ?>
 
 <!DOCTYPE html>

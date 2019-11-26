@@ -38,6 +38,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="card.php">บัตรเติมเงิน</a>
+                       
+                    </li>
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="register.php">เพิ่มสมาชิก</a>
                     </li>
                     
                     <?php } ?>
@@ -58,7 +63,7 @@
                     </li>
                     <?php } else { ?>
                     <li class="nav-item">
-                        <a class="btn btn-warning" href="register.php">Register</a>
+                        
                         <a class="btn btn-primary" href="login.php">Login</a>
                     </li>
                     <?php } ?>
