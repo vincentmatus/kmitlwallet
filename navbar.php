@@ -8,7 +8,7 @@
                             $_SESSION['Balance'] = $row['Balance'];
                         }
 }?>
-
+    <meta charset="UTF-8">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
         
@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="deposit.php">เติมเงิน</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="get_coupon.php">สร้างบัตรเติมเงิน</a>
                     </li>
                     <li class="nav-item">
@@ -43,7 +43,7 @@
                     <li class="nav-item">
                         
                         <a class="nav-link" href="register.php">เพิ่มสมาชิก</a>
-                    </li>
+                    </li> -->
                     
                     <?php } ?>
                 </ul>

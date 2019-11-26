@@ -39,10 +39,12 @@ include_once('connect.php');
     <tr>
       <th scope="col">#</th>
       <th scope="col">UserID</th>
-      <th scope="col">Email</th>
-      <th scope="col">Name</th>
-      <th scope="col">Surname</th>
-      <th scope="col">Balance</th>
+      <th scope="col">TransactionID</th>
+      <th scope="col">type</th>
+      <th scope="col">จำนวน</th>
+      <th scope="col">วันเวลาที่โอน</th>
+      <th scope="col">เลขบัญชีที่โอน</th>
+      <th scope="col">สถานะ</th>
       <th scope="col"></th>
       <th scope="col"></th>
 
@@ -58,13 +60,13 @@ include_once('connect.php');
 if(isset($_GET["txtKeyword"])){
 if ($_GET["txtKeyword"] != "")
 {
-  $sql = "SELECT * FROM user WHERE UserID = '".$_GET['txtKeyword']."' ORDER BY UserID";
+  $sql = "SELECT * FROM history WHERE UserID = '".$_GET['txtKeyword']."' AND type = 'deposit' ORDER BY TransactionID";
 
 }else{
-  $sql = "SELECT * FROM user ORDER BY UserID";
+  $sql = "SELECT * FROM history WHERE type = 'deposit' ORDER BY TransactionID";
 }
 }else{
-  $sql = "SELECT * FROM user ORDER BY UserID";
+  $sql = "SELECT * FROM history WHERE type = 'deposit' ORDER BY TransactionID";
 }
 
 
@@ -76,13 +78,15 @@ if ($result->num_rows > 0) {
         <tr>
         <th scope="row"><?php echo $i ?></th>
         <td><?php echo $row["UserID"];?></td>
-        <td><?php echo $row["Email"];?></td>
-        <td><?php echo $row["name"];?></td>
-        <td><?php echo $row["surname"];?></td>
-        <td><?php echo $row["Balance"];?></td>
-        <td><a href="admin_edituser.php?u_id=<?php echo $row['UserID']; ?>">
+        <td><?php echo $row["TransactionID"];?></td>
+        <td><?php echo $row["type"];?></td>
+        <td><?php echo $row["amount"];?></td>
+        <td><?php echo $row["deposit_date"];?></td>
+        <td><?php echo $row["Bank"];?></td>
+        <td><?php echo $row["deposit_status"];?></td>
+        <td><a href="admin_editdeposit.php?u_id=<?php echo $row['UserID']; ?>&t_id=<?php echo $row['TransactionID']; ?> ">
         <input type="button" name="submit" class="btn btn-success" value="แก้ไข" ></a></td>
-        <td><a href="admin_duser.php?u_id=<?php echo $row['UserID']; ?>" onClick="javascript:return confirm('คุณต้องการลบข้อมูลใช่หรือไม่');">
+        <td><a href="admin_ddeposit.php?u_id=<?php echo $row['UserID']; ?>&t_id=<?php echo $row['TransactionID']; ?> ?>" onClick="javascript:return confirm('คุณต้องการลบข้อมูลใช่หรือไม่');">
         <input type="button" name="submit" class="btn btn-danger" value="ลบ" ></a></td>
       </tr>
 

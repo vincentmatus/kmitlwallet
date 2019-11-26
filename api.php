@@ -19,15 +19,17 @@ $result = $conn->query($sql);
 
 if($result->num_rows > 0){
     $row = $result->fetch_array();
-    echo json_encode($row);
+    //echo json_encode($row);
+    if($row['Balance']>=$amount){
 
-    $output= '{
-        "messages": [
-          {"text": "This Form OPDEV API"},
-          {"text": "Connection Success !"}
-        ]
-       }';
-       print_r($output);
+      $output = 1;
+    }else{
+      $output = 0;
+    }
+    
+    echo "Output : ";
+    echo $output;
+    
 }else{
     echo "Null";
 

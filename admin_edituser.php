@@ -7,7 +7,7 @@ include_once('admin_lock.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>เพิ่มสมาชิก</title>
+    <title>แก้ไขสมาชิก</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -16,26 +16,36 @@ include_once('admin_lock.php');
 
         include_once('connect.php');
 
-        if(isset($_POST['submit'])){
+        if(isset($_GET["u_id"])){
+            $sql = "SELECT * FROM `user` WHERE `UserID` = '".$_GET["u_id"]."' ";
+            $result = $conn->query($sql);
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                 
+            }
+            else{
+                exit();
+            }
 
-            $temp = explode('.',$_FILES['fileUpload']['name']);
-            $newName = round(microtime(true)).'.'. end($temp);
-            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/profiles/'.$newName)){
+        }else{
+            exit();
+        }
 
-                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`, `PictureAccount`)
-                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."', '".$newName."');";
+           if(isset($_POST['submit'])){
+                $sql = "UPDATE `user` SET `UserID`='".$_POST['userid']."',`Email`='".$_POST['email']."',`name`='".$_POST['name']."',`surname`='".$_POST['surname']."',`Balance`='".$_POST['balance']."',`Tel.Number`='".$_POST['telnumber']."',`Birthday`='".$_POST['birthday']."',`admin`='".$_POST['admin']."' WHERE UserID = '".$_GET["u_id"]."' ";
                 $result = $conn->query($sql);
 
                 if($result){
-                    echo '<script> alert("Register Completed!") </script>';
-                    header('Refresh:0; url=login.php');
+                    echo '<script> alert("Edit Completed!") </script>';
+                    header('refresh:0');
                 }else{
-                    echo 'Noo';
+                    echo '<script> alert("Edit Error!") </script>';
                     echo("Error description: " . mysqli_error($conn));
-                }
+                }    
+         }
+         
+         
 
-            } 
-         }   
     ?>
 
 
@@ -46,62 +56,62 @@ include_once('admin_lock.php');
                 <div class="card">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="card-header text-center">
-                            เพิ่มสมาชิก
+                            แก้ไขสมาชิก
                         </div>
                         <div class="card-body">
                         <div class="form-group row">
                             <label for="firstname" class="col-sm-3 col-form-label">Userid</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="userid" name="userid" required>
+                                    <input type="text" class="form-control" id="userid" name="userid" value="<?php echo $row["UserID"];?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="lastname" class="col-sm-3 col-form-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="email" name="email" required>
+                                    <input type="text" class="form-control" id="email" name="email" value="<?php echo $row["Email"];?>" required>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="password" class="col-sm-3 col-form-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                            </div>
+
                             <div class="form-group row">
                                 <label for="password" class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <input type="text" class="form-control" id="name" name="name" value="<?php echo $row["name"];?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="password" class="col-sm-3 col-form-label">Surname</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="surname" name="surname" required>
+                                    <input type="text" class="form-control" id="surname" name="surname" value="<?php echo $row["surname"];?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="password" class="col-sm-3 col-form-label">Tel.</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="telnumber" name="telnumber" required>
+                                    <input type="text" class="form-control" id="telnumber" name="telnumber" value="<?php echo $row["Tel.Number"];?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="password" class="col-sm-3 col-form-label">Birthday</label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="birthday" name="birthday" required>
+                                    <input type="date" class="form-control" id="birthday" name="birthday" value="<?php echo $row["Birthday"];?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="fileUpload" class="col-sm-3 col-form-label">Upload</label>
+                                <label for="password" class="col-sm-3 col-form-label">Balance</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" id="fileUpload" name="fileUpload" onchange="readURL(this)">
+                                    <input type="text" class="form-control" id="balance" name="balance" value="<?php echo $row["Balance"]; ?>" required>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 col-form-label">Status</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="admin" name="admin" value="<?php echo $row["admin"]; ?>" required>
+                                </div>
+                            </div>
+                            
+                        
 
-                            <figure class="figure">
-                                <img id="imgUpload" class="figure-img img-fluid rounded" alt="">
-                                <figcaption class="figure-caption">ตัวอย่างรูป.</figcaption>
-                            </figure>
+                      
 
                         </div>
                         <div class="card-footer text-center">
@@ -118,19 +128,7 @@ include_once('admin_lock.php');
      <script src="node_modules/jquery/dist/jquery.min.js"></script>
      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
      <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-     <script>
-        function readURL(input){
-            var reader = new FileReader();
-
-            reader.onload = function(e){
-                console.log(e.target.result)
-                $('#imgUpload').attr('src', e.target.result).width(300)
-
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        }
-     </script>
+   
 
 </body>
 </html>
