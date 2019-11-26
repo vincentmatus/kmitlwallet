@@ -44,7 +44,7 @@ include_once('admin_lock.php');
                     
                 //     //$x = $x-1;
                 // }else{
-                    $sql = "INSERT INTO `prepaidcard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
+                    $sql = "INSERT INTO `PrepaidCard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
                     $result = $conn->query($sql);
                     if($result){
                         echo '<script> alert("Completed!") </script>';
