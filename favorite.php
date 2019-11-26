@@ -14,7 +14,7 @@ include_once('user_lock.php');
 <body>
 
     <?php include 'navbar.php';?>
-    <meta charset="UTF-8">
+    
 
  
 <?php

@@ -18,7 +18,7 @@ include_once('admin_lock.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>เติมเงิน</title>
+    <title>สร้างบัตรเติมเงิน</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -58,7 +58,7 @@ include_once('admin_lock.php');
                 <div class="card">
                     <form action="" method="POST" enctype="multipart/form-data">
                         <div class="card-header text-center">
-                            เติมเงินผ่านธนาคาร
+                        สร้างบัตรเติมเงิน
                         </div>
                         <div class="card-body">
                             <div class="form-group row">
