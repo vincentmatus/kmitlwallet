@@ -6,7 +6,8 @@ include_once('admin_lock.php');
 <?php
 	function coupon($l){
 		$coupon = "CE".substr(str_shuffle(str_repeat('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',$l-2)),0,$l-2);
- 
+        echo $coupon;
+        echo "<br>";
 		return $coupon;
 	}
  
@@ -28,6 +29,7 @@ include_once('admin_lock.php');
         include_once('connect.php');
         
         if(isset($_POST['submit'])){
+            
             $amount = $_POST['amount'];
             $len = $_POST['len'];
             $value = $_POST['value'];
@@ -35,16 +37,23 @@ include_once('admin_lock.php');
 
             for ($x = 0; $x < $amount ; $x++) {
                 $coupon = coupon($len);
-                $sql = "SELECT * FROM `prepaidcard` WHERE CareID = '".$coupon."'";
+                $sql = "SELECT * FROM `PrepaidCard` WHERE CardID = '".$coupon."'";
                 $result = $conn->query($sql);
-                if($result){
-                    $x = $x-1;
-                }else{
+                // if($result){
+                //     echo "ku";
+                    
+                //     //$x = $x-1;
+                // }else{
                     $sql = "INSERT INTO `prepaidcard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
                     $result = $conn->query($sql);
-                }      
+                    if($result){
+                        echo '<script> alert("Completed!") </script>';
+                    }else{
+                        echo("Error description: " . mysqli_error($conn));
+                    }
+                // }      
             }
-                echo '<script> alert("Completed!") </script>';
+                
             
             
          }   
