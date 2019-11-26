@@ -20,14 +20,14 @@ include_once('connect.php');
 
 if(isset($_POST['submit'])){
 
-    $sql = "SELECT * FROM `prepaidcard` WHERE CardID = '".$_POST['cardid']."' and status = 0 ";
+    $sql = "SELECT * FROM `PrepaidCard` WHERE CardID = '".$_POST['cardid']."' and status = 0 ";
     $resultcard = $conn->query($sql);
     $rowcard = $resultcard->fetch_assoc();
 
    
     if($resultcard->num_rows > 0){
         //เปลี่ยน status บัตรเป็นใช้แล้ว
-        $sql = "UPDATE `prepaidcard` SET `status`=1 WHERE CardID = '".$_POST['cardid']."' ";
+        $sql = "UPDATE `PrepaidCard` SET `status`=1 WHERE CardID = '".$_POST['cardid']."' ";
         $result = $conn->query($sql);
         //query เงินผู้เติม
         $sql = "SELECT Balance FROM `user` WHERE UserID = '".$_SESSION['id']."' ";
