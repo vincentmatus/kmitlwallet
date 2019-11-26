@@ -68,20 +68,20 @@ if(isset($_POST['submit'])){
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <label for="username" class="col-sm-3 col-form-label">รหัส</label>
+                            <label for="username" class="col-sm-3 col-form-label">รหัสสมาชิก</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="UserID" name="UserID" value="" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-sm-3 col-form-label">ชื่อ</label>
+                            <label for="password" class="col-sm-3 col-form-label">ชื่อรายการโปรด</label>
                             <div class="col-sm-9">
                             <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                         </div>
                     </div>
                         <div class="card-footer text-center">
-                            <input type="submit" name="submit" class="btn btn-success" value="ยืนยัน">
+                            <input type="submit" name="submit" class="btn btn-success" value="เพิ่ม">
                         </div>
                     </form>
                 </div>

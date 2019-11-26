@@ -16,7 +16,7 @@ include_once('connect.php');
 
 
 
-    <?php include 'navbar.php';?>
+    <?php include 'navbar.php';?><br>
 <div class="container">
 <div class="row">
 <form action="" method="GET" enctype="multipart/form-data">

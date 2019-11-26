@@ -81,7 +81,7 @@ include_once('user_lock.php');
 
                         </div>
                         <div class="card-footer text-center">
-                            <input type="submit" name="submit" class="btn btn-success" value="Register">
+                            <input type="submit" name="submit" class="btn btn-success" value="บันทึก">
                         </div>
                     </form>
                 </div>

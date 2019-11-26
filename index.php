@@ -16,13 +16,13 @@
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="./uploads/index/KMITLWallet1.jpg" class="d-block w-100" alt="...">
+                <img src="./uploads/index/KMITLWallet1.png" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1570942872213-1242607a35eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&h=400&q=80" class="d-block w-100" alt="...">
+                <img src="./uploads/index/KMITLWallet2.jpg" class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item">
-                <img src="https://images.unsplash.com/photo-1562584006-d4d45dbe4ab1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1280&h=400&q=80" class="d-block w-100" alt="...">
+                <img src="./uploads/index/KMITLWallet3.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

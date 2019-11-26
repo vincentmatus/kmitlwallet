@@ -9,10 +9,11 @@
                         }
 }?>
     <meta charset="UTF-8">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light  " style="background-color: #CD3700;">
         <div class="container">
-        
-            <a class="navbar-brand" href="index.php">KMITL</a>
+            <a class="navbar-brand" href="index.php">
+            <img src="./uploads/index/logo_kmitlwallet.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <font color="white"> KMITL </font></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,16 +23,16 @@
   
                     <?php if (isset($_SESSION['id'])) { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="pay.php">โอนเงิน</a>
+                        <a class="nav-link" href="pay.php"><font color="white"> โอนเงิน </font></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="showhistory.php">History</a>
+                        <a class="nav-link" href="showhistory.php"><font color="white"> History</font></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="favorite.php">รายการโปรด</a>
+                        <a class="nav-link" href="favorite.php"><font color="white"> รายการโปรด</font></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="deposit.php">เติมเงิน</a>
+                        <a class="nav-link" href="deposit.php"><font color="white"> เติมเงิน</font></a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link" href="get_coupon.php">สร้างบัตรเติมเงิน</a>
@@ -52,11 +53,16 @@
                 <?php if (isset($_SESSION['id'])) { ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ยินดีต้อนรับ คุณ <?php echo $_SESSION['name']; ?> ยอดเงินคงเหลือ <?php echo $_SESSION['Balance']; ?>
+                        <font color="white"> ยินดีต้อนรับ คุณ <?php echo $_SESSION['name']; ?> ยอดเงินคงเหลือ <?php echo $_SESSION['Balance']; ?> บาท</font>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <?php if ($_SESSION['admin']==1){ ?>
+                        
+                        <a class="dropdown-item" href="admin_showusers.php">ตรวจสอบผู้ใช้</a>
+                        <a class="dropdown-item" href="admin_showdeposit.php">ตรวจสอบการเติมเงิน</a>
+                        <a class="dropdown-item" href="get_coupon.php">สร้างบัตรเติมเงิน</a>
+
+                        <?php } ?>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="logout.php">Logout</a>
                         </div>
@@ -64,7 +70,7 @@
                     <?php } else { ?>
                     <li class="nav-item">
                         
-                        <a class="btn btn-primary" href="login.php">Login</a>
+                        <a class="btn btn-outline-light" href="login.php">Login</a>
                     </li>
                     <?php } ?>
                 </ul>

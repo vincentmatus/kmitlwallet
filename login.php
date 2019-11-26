@@ -55,6 +55,7 @@
                 $_SESSION['id'] = $row['UserID'];
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['Balance'] = $row['Balance'];
+                $_SESSION['admin'] = $row['admin'];
                 header('location:index.php');
             }else{
                 echo 'Username or password is invalid';
