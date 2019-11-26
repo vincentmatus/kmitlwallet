@@ -34,17 +34,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="deposit.php"><font color="white"> เติมเงิน</font></a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="get_coupon.php">สร้างบัตรเติมเงิน</a>
-                    </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="card.php">บัตรเติมเงิน</a>
+                        <a class="nav-link" href="card.php"><font color="white">บัตรเติมเงิน</font></a>
                        
                     </li>
-                    <li class="nav-item">
-                        
-                        <a class="nav-link" href="register.php">เพิ่มสมาชิก</a>
-                    </li> -->
+                    
                     
                     <?php } ?>
                 </ul>

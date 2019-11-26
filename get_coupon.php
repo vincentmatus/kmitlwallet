@@ -46,14 +46,10 @@ include_once('admin_lock.php');
                 // }else{
                     $sql = "INSERT INTO `PrepaidCard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
                     $result = $conn->query($sql);
-                    if($result){
-                        echo '<script> alert("Completed!") </script>';
-                    }else{
-                        echo("Error description: " . mysqli_error($conn));
-                    }
+                    
                 // }      
             }
-                
+            echo '<script> alert("Completed!") </script>';
             
             
          }   
