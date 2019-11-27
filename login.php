@@ -21,6 +21,10 @@
         
         
     ?>
+
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto mt-5">
@@ -43,24 +47,39 @@
                             </div>
                         </div>
                         <?php
-                        if (isset($_POST['submit'])) {
+        if (isset($_POST['submit'])) {
             $username = $_POST['username'];
             $password = $conn->real_escape_string($_POST['password']);
 
-            $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND (`Password` = MD5('".$password."') OR `Password` = '".$password."')";
-            $result = $conn->query($sql);
+            
+            
+            $pattern = '/^[0-9a-zA-Z-@._]{4,32}$/i';
+            $patternpass = '/^[0-9a-zA-Z\W]{8,}$/i';
+            if(preg_match($pattern, $username)){
+                if(preg_match($patternpass, $password)){
+                    $sql = "SELECT * FROM `user` WHERE `Email` = '".$username."' AND (`Password` = MD5('".$password."') OR `Password` = '".$password."')";
+                    $result = $conn->query($sql);
 
-            if($result->num_rows > 0){
-                $row = $result->fetch_assoc();
-                $_SESSION['id'] = $row['UserID'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['Balance'] = $row['Balance'];
-                $_SESSION['admin'] = $row['admin'];
-                header('location:index.php');
+                    if($result->num_rows > 0){
+                        $row = $result->fetch_assoc();
+                        $_SESSION['id'] = $row['UserID'];
+                        $_SESSION['name'] = $row['name'];
+                        $_SESSION['Balance'] = $row['Balance'];
+                        $_SESSION['admin'] = $row['admin'];
+                        header('location:index.php');
+                    }else{
+                        echo 'Username or password is invalid';
+
+                    }
+                }else{
+                    echo '<font color="red">Password ต้องมี 8 ตัวขึ้นไป และต้องเป็นตัวอักษรภาษาอังกฤษ, ตัวเลข, อักขระพิเศษ</font>';
+                }
             }else{
-                echo 'Username or password is invalid';
-
+                echo '<font color="red">E-mail ต้องมีระหว่าง 4 - 32 ตัว และต้องเป็นตัวอักษรภาษาอังกฤษ, ตัวเลข, อักขระพิเศษได้เฉพาะ - @ . _</font>';
             }
+
+            
+            
         }
             ?>
                     </div>

@@ -15,26 +15,31 @@ include_once('user_lock.php');
     <?php
 
         include_once('connect.php');
-
+        $pattern = '/^[0-9]{1,128}$/i';
+        
         if(isset($_POST['submit'])){
+            $bank = $_POST['bank'];
+            if(preg_match($pattern, $bank)){
+                $temp = explode('.',$_FILES['fileUpload']['name']);
+                $newName = round(microtime(true)).'.'. end($temp);
+                if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/deposit-slip/'.$newName)){
 
-            $temp = explode('.',$_FILES['fileUpload']['name']);
-            $newName = round(microtime(true)).'.'. end($temp);
-            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/deposit-slip/'.$newName)){
+                    $sql = "INSERT INTO `history`(`UserID`, `type`, amount,deposit_date,Bank, Picture)
+                    VALUES ('".$_SESSION['id']."', 'deposit', '".$_POST['value']."','".$_POST['deposit_date']."','".$_POST['bank']."','".$newName."');";
+                    $result = $conn->query($sql);
 
-                $sql = "INSERT INTO `history`(`UserID`, `type`, amount,deposit_date,Bank, Picture)
-                VALUES ('".$_SESSION['id']."', 'deposit', '".$_POST['value']."','".$_POST['deposit_date']."','".$_POST['bank']."','".$newName."');";
-                 $result = $conn->query($sql);
-
-                if($result){
-                    echo '<script> alert("Completed!") </script>';
-                    header('Refresh:0; url=deposit.php');
-                }else{
-                    echo 'Noo';
-                    echo("Error description: " . mysqli_error($conn));
-                }
+                    if($result){
+                        echo '<script> alert("Completed!") </script>';
+                        header('Refresh:0; url=deposit.php');
+                    }else{
+                        echo 'Noo';
+                        echo("Error description: " . mysqli_error($conn));
+                    }
             } 
-         }   
+         }else{
+            $error = '<font color="red">เลขบัญชีต้องมี 1-128 ตัว และต้องเป็นตัวเลข</font>';
+         }
+        }   
     ?>
 
 
@@ -70,7 +75,7 @@ include_once('user_lock.php');
                             <div class="form-group row">
                                 <label for="fileUpload" class="col-sm-3 col-form-label">Upload</label>
                                 <div class="col-sm-9">
-                                    <input type="file" class="form-control" id="fileUpload" name="fileUpload" onchange="readURL(this)">
+                                    <input type="file" class="form-control" id="fileUpload" name="fileUpload" onchange="readURL(this)" required>
                                 </div>
                             </div>
 
@@ -78,7 +83,10 @@ include_once('user_lock.php');
                                 <img id="imgUpload" class="figure-img img-fluid rounded" alt="">
                                 <figcaption class="figure-caption">ตัวอย่างรูป.</figcaption>
                             </figure>
-
+                            <?php if(isset($error)){
+                                echo '<br>';
+                                echo $error;
+                            }?>
                         </div>
                         <div class="card-footer text-center">
                             <input type="submit" name="submit" class="btn btn-success" value="บันทึก">

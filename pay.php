@@ -37,36 +37,51 @@ if(isset($_POST['submit'])){
 
 
     if($resultre->num_rows > 0){
+        $pattern = '/^[0-9.]{1,10}$/i';
+        $patternbank = '/^[0-9]{4,20}$/i';
+    
+        
         if($_SESSION['Balancetrans']>=$_POST['value']){
-            $_SESSION['Balancetrans'] = $_SESSION['Balancetrans']-$_POST['value'];
-            $_SESSION['Balancere'] = $_POST['value'] + $_SESSION['Balancere'];
+            if($_POST['value']>0){
+                if(preg_match($pattern, $_POST['value'])){
+                    if(preg_match($patternbank, $_POST['UserID'])){
+                    $_SESSION['Balancetrans'] = floatval($_SESSION['Balancetrans'])-floatval($_POST['value']);
+                    $_SESSION['Balancere'] = floatval($_POST['value']) + floatval($_SESSION['Balancere']);
 
-            $sql = "UPDATE `user` SET `Balance`= '".$_SESSION['Balancetrans']."' WHERE `UserID` = '".$_SESSION['id']."'";
-            $result = $conn->query($sql);
+                    $sql = "UPDATE `user` SET `Balance`= '".$_SESSION['Balancetrans']."' WHERE `UserID` = '".$_SESSION['id']."'";
+                    $result = $conn->query($sql);
 
-            $sql = "UPDATE `user` SET `Balance`= '".$_SESSION['Balancere']."' WHERE `UserID` = '".$_POST['UserID']."'";
-            $result = $conn->query($sql);
+                    $sql = "UPDATE `user` SET `Balance`= '".$_SESSION['Balancere']."' WHERE `UserID` = '".$_POST['UserID']."'";
+                    $result = $conn->query($sql);
 
+                    if($result){
+                
+                    
+                        $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`,remind)
+                        VALUES ('".$_SESSION['id']."', 'transfer', '".$_POST['value']."',  '".$_POST['UserID']."','".$_POST['remind']."');";
+                        $result = $conn->query($sql);
 
-        
-            if($result){
-                $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`,remind)
-                VALUES ('".$_SESSION['id']."', 'transfer', '".$_POST['value']."',  '".$_POST['UserID']."','".$_POST['remind']."');";
-                $result = $conn->query($sql);
+                        $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`)
+                        VALUES ('".$_POST['UserID']."', 'receive', '".$_POST['value']."',  '".$_SESSION['id']."');";
+                        $result = $conn->query($sql);
 
-                $sql = "INSERT INTO `history`(`UserID`, `type`, amount, `Account`)
-                VALUES ('".$_POST['UserID']."', 'receive', '".$_POST['value']."',  '".$_SESSION['id']."');";
-                $result = $conn->query($sql);
-
-
-
-                echo '<script> alert("Completed!") </script>';
-
-        
+                        echo '<script> alert("Completed!") </script>';
+    
+                    }else{
+                        echo 'Noo';
+                        echo("Error description: " . mysqli_error($conn));
+                    }
+                }else{
+                    $error = '<font color="red">รหัสบัญชีต้องมี 4-20 ตัว</font>';
+                }
+                }else{
+                    $error = '<font color="red">จำนวนเงินต้องเป็นตัวเลข และ . เท่านั้น</font>';
+                }
             }else{
-                echo 'Noo';
-                echo("Error description: " . mysqli_error($conn));
+                $error = '<font color="red">จำนวนเงินที่โอนต้องมีค่า > 0</font>';
             }
+        
+            
 
         }else{
             echo '<script> alert("ยอดเงินคงเหลือไม่พอ!") </script>';
@@ -123,6 +138,10 @@ if(isset($_POST['submit'])){
                                 <textarea class="form-control" id="remind" name="remind" rows="3" placeholder="ไม่เกิน 255 ตัวอักษร"></textarea>
                             </div>
                         </div>
+                        <?php if(isset($error)){
+                                echo '<br>';
+                                echo $error;
+                            }?>
                     </div>
                         <div class="card-footer text-center">
                             <input type="submit" name="submit" class="btn btn-success" value="ยืนยัน">
