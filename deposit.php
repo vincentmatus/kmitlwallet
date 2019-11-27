@@ -1,4 +1,4 @@
-<?php session_start(); 
+<?php session_start();
 include_once('user_lock.php');
 ?>
 <!DOCTYPE html>

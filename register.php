@@ -22,13 +22,13 @@ include_once('admin_lock.php');
             $newName = round(microtime(true)).'.'. end($temp);
             if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/profiles/'.$newName)){
 
-                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`, `PictureAccount`)
-                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."', '".$newName."');";
+                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`)
+                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."');";
                 $result = $conn->query($sql);
 
                 if($result){
                     echo '<script> alert("Register Completed!") </script>';
-                    header('Refresh:0; url=login.php');
+                    
                 }else{
                     echo 'Noo';
                     echo("Error description: " . mysqli_error($conn));

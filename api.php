@@ -14,7 +14,7 @@ $amount=$_GET['amount'];
 }
 include('connect.php');
 
-$sql = "SELECT `UserID`, `Email`, `name`, `surname`, `Balance`, `Tel.Number` FROM `user` WHERE `UserID` = '".$RID."'";
+$sql = "SELECT `UserID`, `Email`, `name`, `surname`, `Balance`, `Tel.Number` FROM `user` WHERE `UserID` = '".$TID."'";
 $result = $conn->query($sql);
 
 if($result->num_rows > 0){
