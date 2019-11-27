@@ -22,7 +22,7 @@ include_once('user_lock.php');
             if(preg_match($pattern, $bank)){
                 $temp = explode('.',$_FILES['fileUpload']['name']);
                 $newName = round(microtime(true)).'.'. end($temp);
-                if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $_SERVER['DOCUMENT_ROOT']."/uploads/profiles/".$newName)){
+                if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/deposit-slip/'.$newName)){
 
                     $sql = "INSERT INTO `history`(`UserID`, `type`, amount,deposit_date,Bank, Picture)
                     VALUES ('".$_SESSION['id']."', 'deposit', '".$_POST['value']."','".$_POST['deposit_date']."','".$_POST['bank']."','".$newName."');";
