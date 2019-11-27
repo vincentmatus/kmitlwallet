@@ -34,7 +34,7 @@ include_once('admin_lock.php');
                     echo("Error description: " . mysqli_error($conn));
                 }
 
-            // } 
+            } 
          }   
     ?>
 
