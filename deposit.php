@@ -7,7 +7,7 @@ include_once('user_lock.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>เติมเงิน !</title>
+    <title>เติมเงิน</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -32,7 +32,7 @@ include_once('user_lock.php');
                         echo '<script> alert("Completed!") </script>';
                         header('Refresh:0; url=deposit.php');
                     }else{
-                        echo 'Noo';
+                        echo 'No';
                         echo("Error description: " . mysqli_error($conn));
                     }
             } 

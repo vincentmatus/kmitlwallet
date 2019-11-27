@@ -7,7 +7,7 @@ include_once('admin_lock.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>เพิ่มสมาชิก !</title>
+    <title>เพิ่มสมาชิก</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
@@ -15,12 +15,12 @@ include_once('admin_lock.php');
     <?php
 
         include_once('connect.php');
-        echo $_SERVER['DOCUMENT_ROOT'];
+        // echo $_SERVER['DOCUMENT_ROOT'];
         if(isset($_POST['submit'])){
 
             $temp = explode('.',$_FILES['fileUpload']['name']);
             $newName = round(microtime(true)).'.'. end($temp);
-            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], $_SERVER['DOCUMENT_ROOT'].'/uploads/profiles/'.$newName)){
+            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], '/uploads/profiles/'.$newName)){
 
                 $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`, `PictureAccount`)
                 VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."', '".$newName."');";
@@ -30,7 +30,7 @@ include_once('admin_lock.php');
                     echo '<script> alert("Register Completed!") </script>';
                     
                 }else{
-                    echo 'Noo';
+                    echo 'No';
                     echo("Error description: " . mysqli_error($conn));
                 }
 
