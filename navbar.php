@@ -52,7 +52,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <?php if ($_SESSION['admin']==1){ ?>
-                        
+                            <a class="dropdown-item" href="register.php">เพิ่มผู้ใช้</a>
                         <a class="dropdown-item" href="admin_showusers.php">ตรวจสอบผู้ใช้</a>
                         <a class="dropdown-item" href="admin_showdeposit.php">ตรวจสอบการเติมเงิน</a>
                         <a class="dropdown-item" href="get_coupon.php">สร้างบัตรเติมเงิน</a>
