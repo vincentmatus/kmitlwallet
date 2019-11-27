@@ -18,12 +18,12 @@ include_once('admin_lock.php');
 
         if(isset($_POST['submit'])){
 
-            // $temp = explode('.',$_FILES['fileUpload']['name']);
-            // $newName = round(microtime(true)).'.'. end($temp);
-            // if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], 'uploads/profiles/'.$newName)){
+            $temp = explode('.',$_FILES['fileUpload']['name']);
+            $newName = round(microtime(true)).'.'. end($temp);
+            if(move_uploaded_file($_FILES['fileUpload']['tmp_name'], './uploads/profiles/'.$newName)){
 
-                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`)
-                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."');";
+                $sql = "INSERT INTO `user`(`UserID`, `Email`, `Password`, `name`, `surname`, `Tel.Number`,`Birthday`, `PictureAccount`)
+                VALUES ('".$_POST['userid']."', '".$_POST['email']."', MD5('".$_POST['password']."'), '".$_POST['name']."', '".$_POST['surname']."', '".$_POST['telnumber']."', '".$_POST['birthday']."', '".$newName."');";
                 $result = $conn->query($sql);
 
                 if($result){
@@ -118,7 +118,7 @@ include_once('admin_lock.php');
      <script src="node_modules/jquery/dist/jquery.min.js"></script>
      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
      <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-     <!-- <script>
+     <script>
         function readURL(input){
             var reader = new FileReader();
 
@@ -130,7 +130,7 @@ include_once('admin_lock.php');
 
             reader.readAsDataURL(input.files[0]);
         }
-     </script> -->
+     </script>
 
 </body>
 </html>
