@@ -72,7 +72,7 @@ if(isset($_POST['submit'])){
                         echo("Error description: " . mysqli_error($conn));
                     }
                 }else{
-                    $error = '<font color="red">รหัสบัญชีต้องมี 4-20 ตัว</font>';
+                    $error = '<font color="red">รหัสบัญชีต้องมี 4-20 ตัว และเป็นตัวเลขเท่านั้น</font>';
                 }
                 }else{
                     $error = '<font color="red">จำนวนเงินต้องเป็นตัวเลข และ . เท่านั้น</font>';

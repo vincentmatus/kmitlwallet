@@ -37,14 +37,14 @@ include_once('admin_lock.php');
 
             for ($x = 0; $x < $amount ; $x++) {
                 $coupon = coupon($len);
-                $sql = "SELECT * FROM `PrepaidCard` WHERE CardID = '".$coupon."'";
+                $sql = "SELECT * FROM `prepaidcard` WHERE CardID = '".$coupon."'";
                 $result = $conn->query($sql);
                 // if($result){
                 //     echo "ku";
                     
                 //     //$x = $x-1;
                 // }else{
-                    $sql = "INSERT INTO `PrepaidCard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
+                    $sql = "INSERT INTO `prepaidcard`(`CardID`, `amount`) VALUES ('".$coupon."','".$value."')";
                     $result = $conn->query($sql);
                     
                 // }      
